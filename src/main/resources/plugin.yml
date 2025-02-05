@@ -1,0 +1,6 @@
+name: SkyEnchants
+version: '1.0'
+main: io.github.lianjordaan.skyEnchants.SkyEnchants
+api-version: '1.21'
+authors: [ Lian ]
+website: https://lianjordaan.co.za/
