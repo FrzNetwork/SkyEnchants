@@ -4,3 +4,12 @@ main: io.github.lianjordaan.skyEnchants.SkyEnchants
 api-version: '1.21'
 authors: [ Lian ]
 website: https://lianjordaan.co.za/
+depend: [ItemVault]
+commands:
+    skyenchants:
+        description: The command to manage enchantments
+        usage: /skyenchants <add/delete/give/reload>
+permissions:
+    skyenchants.command:
+        description: Access to use the skyenchants command
+        default: op

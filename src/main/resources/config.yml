@@ -1,0 +1,36 @@
+# The config section for the ResourceConverter enchantment
+resource-converter:
+    # The list of resources to convert and what they should convert to
+    # Will use the item block id as the key and the resource path
+    # from the itemvault plugin as the value
+    resources:
+        COBBLESTONE:
+            path: /ores/overworld/normal/cobblestone
+            amount: 1
+        COAL_ORE:
+            path: /ores/overworld/normal/coal
+            amount: 1
+        COAL_BLOCK:
+            path: /ores/overworld/normal/coal
+            amount: 9
+        IRON_ORE:
+            path: /ores/overworld/normal/iron
+            amount: 1
+        IRON_BLOCK:
+            path: /ores/overworld/normal/iron
+            amount: 9
+
+
+# The config for the AutoPickup enchantment
+auto-pickup:
+    # Whether to simply delete experience orbs from mined blocks
+    delete-experience-orbs: true
+
+# The config for the ResourceEnchanter enchantment
+resource-enchanter:
+    # The list of resources that can be enchanted and what they should convert to
+    resources:
+        "/ores/overworld/normal/cobblestone": "/ores/overworld/enchanted/cobblestone"
+        "/ores/overworld/normal/coal": "/ores/overworld/enchanted/coal"
+        "/ores/overworld/normal/iron": "/ores/overworld/enchanted/iron"
+        "/ores/overworld/normal/gold": "/ores/overworld/enchanted/gold"
