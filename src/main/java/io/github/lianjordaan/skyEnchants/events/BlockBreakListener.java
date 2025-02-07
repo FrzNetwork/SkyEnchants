@@ -28,6 +28,8 @@ public class BlockBreakListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
+        if (event.isCancelled()) return;
+
         Player player = event.getPlayer();
         ItemStack tool = player.getInventory().getItemInMainHand();
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) return;
