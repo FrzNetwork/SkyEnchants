@@ -19,6 +19,18 @@ resource-converter:
         IRON_BLOCK:
             path: /ores/overworld/normal/iron
             amount: 9
+        GOLD_ORE:
+            path: /ores/overworld/normal/gold
+            amount: 1
+        GOLD_BLOCK:
+            path: /ores/overworld/normal/gold
+            amount: 9
+        DIAMOND_ORE:
+            path: /ores/overworld/normal/diamond
+            amount: 1
+        DIAMOND_BLOCK:
+            path: /ores/overworld/normal/diamond
+            amount: 9
 
 
 # The config for the AutoPickup enchantment
@@ -34,3 +46,4 @@ resource-enchanter:
         "/ores/overworld/normal/coal": "/ores/overworld/enchanted/coal"
         "/ores/overworld/normal/iron": "/ores/overworld/enchanted/iron"
         "/ores/overworld/normal/gold": "/ores/overworld/enchanted/gold"
+        "/ores/overworld/normal/diamond": "/ores/overworld/enchanted/diamond"

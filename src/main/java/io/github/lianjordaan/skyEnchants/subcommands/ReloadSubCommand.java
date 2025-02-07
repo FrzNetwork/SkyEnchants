@@ -24,7 +24,7 @@ public class ReloadSubCommand {
             return true;
         }
         plugin.reloadConfig();
-        sender.sendMessage(MiniMessage.miniMessage().deserialize("<green>§lSkyEnchants §areloaded."));
+        sender.sendMessage(MiniMessage.miniMessage().deserialize("<green>SkyEnchants has been reloaded."));
         return true;
     }
 }
