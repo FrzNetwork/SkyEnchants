@@ -1,11 +1,14 @@
 package io.github.lianjordaan.skyEnchants.events;
 
 import io.github.lianjordaan.skyEnchants.EnchantmentRegistry;
+import io.github.lianjordaan.skyEnchants.SkyEnchants;
 import io.github.lianjordaan.skyEnchants.enchantments.AutoPickupEnchant;
 import io.github.lianjordaan.skyEnchants.enchantments.FortuneEnchant;
 import io.github.lianjordaan.skyEnchants.enchantments.ResourceConverterEnchant;
 import io.github.lianjordaan.skyEnchants.enchantments.ResourceEnchanterEnchant;
 import io.github.lianjordaan.skyEnchants.utils.ItemUtils;
+import io.github.lianjordaan.skyMineCore.SkyMineCore;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -21,9 +24,11 @@ import java.util.List;
 
 public class BlockBreakListener implements Listener {
     private final JavaPlugin plugin;
+    private final SkyMineCore skyMineCore;
 
-    public BlockBreakListener(JavaPlugin plugin) {
+    public BlockBreakListener(JavaPlugin plugin, SkyMineCore skyMineCore) {
         this.plugin = plugin;
+        this.skyMineCore = skyMineCore;
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -66,11 +71,10 @@ public class BlockBreakListener implements Listener {
         // Apply Resource Enchanter (chance per item)
         if (resourceEnchanter != null && resourceEnchanter.hasEnchantment(tool)) {
             int level = resourceEnchanter.getLevel(tool);
-            List<ItemStack> enchantedDrops = new ArrayList<>();
-            for (ItemStack drop : drops) {
-                enchantedDrops.add(resourceEnchanter.convertItemToEnchanted(drop, level)); // Apply enchant chance
+            ItemStack enchantedDrop = resourceEnchanter.convertItemToEnchanted(drops.getFirst(), level);
+            if (enchantedDrop != null) {
+                drops.add(enchantedDrop);
             }
-            drops = enchantedDrops;
         }
 
         // Normalize ItemStacks
@@ -91,6 +95,16 @@ public class BlockBreakListener implements Listener {
         } else {
             for (ItemStack drop : drops) {
                 player.getWorld().dropItemNaturally(event.getBlock().getLocation().toCenterLocation(), drop);
+            }
+        }
+
+        if (!event.isCancelled()) {
+            SkyMineCore skyMineCore = this.skyMineCore;
+            if (skyMineCore != null) {
+                skyMineCore.getUserEvents().breakBlock(event.getPlayer().getUniqueId());
+            } else {
+                player.sendMessage(MiniMessage.miniMessage().deserialize("<red>SkyMineCore is null during block break event! Please contact the server administrator immediately."));
+                plugin.getLogger().warning("SkyMineCore is null during block break event! Check plugin dependencies.");
             }
         }
     }

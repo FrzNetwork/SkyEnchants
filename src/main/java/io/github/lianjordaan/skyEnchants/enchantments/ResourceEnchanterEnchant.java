@@ -18,18 +18,18 @@ public class ResourceEnchanterEnchant extends SimpleEnchantment {
     }
 
     public ItemStack convertItemToEnchanted(ItemStack item, int level) {
-        if (item == null || level <= 0) return item; // No change if no enchantment level
+        if (item == null || level <= 0) return null; // No change if no enchantment level
 
         ItemManager itemManager = new ItemManager();
 
         // Calculate chance (1% per level)
         if (random.nextInt(100) >= level) {
-            return item; // Failed to convert, return original item
+            return null; // Failed to convert, return original item
         }
 
         // Load the resource conversion mapping from config
         ConfigurationSection resources = plugin.getConfig().getConfigurationSection("resource-enchanter.resources");
-        if (resources == null) return item;
+        if (resources == null) return null;
 
         // Find the matching item path
         for (String normalPath : resources.getKeys(false)) {
@@ -46,6 +46,6 @@ public class ResourceEnchanterEnchant extends SimpleEnchantment {
             }
         }
 
-        return item; // Return original item if no match was found
+        return null; // Return original item if no match was found
     }
 }

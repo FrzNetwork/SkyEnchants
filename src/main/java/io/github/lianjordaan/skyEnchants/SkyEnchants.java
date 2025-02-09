@@ -2,6 +2,7 @@ package io.github.lianjordaan.skyEnchants;
 
 import io.github.lianjordaan.skyEnchants.enchantments.*;
 import io.github.lianjordaan.skyEnchants.events.BlockBreakListener;
+import io.github.lianjordaan.skyMineCore.SkyMineCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -14,9 +15,20 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 public final class SkyEnchants extends JavaPlugin {
+    private SkyMineCore skyMineCore; // Store reference
 
     @Override
     public void onEnable() {
+        // load and store reference to SkyMineCore
+
+        // Get the SkyMineCore instance only once
+        this.skyMineCore = (SkyMineCore) getServer().getPluginManager().getPlugin("SkyMineCore");
+
+        if (skyMineCore == null) {
+            getLogger().warning("SkyMineCore plugin not found! Some features may not work.");
+        }
+
+
         // load default config
         saveDefaultConfig();
 
@@ -27,7 +39,7 @@ public final class SkyEnchants extends JavaPlugin {
         EnchantmentRegistry.register(new ResourceEnchanterEnchant(this));
 
         // Register events
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(this, skyMineCore), this);
 
         // Register commands
         getCommand("skyenchants").setExecutor(new SkyEnchantsCommand(this));
@@ -40,6 +52,10 @@ public final class SkyEnchants extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public SkyMineCore getSkyMineCore() {
+        return skyMineCore;
     }
 
 }
