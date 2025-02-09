@@ -4,7 +4,7 @@ main: io.github.lianjordaan.skyEnchants.SkyEnchants
 api-version: '1.21'
 authors: [ Lian ]
 website: https://lianjordaan.co.za/
-depend: [ItemVault]
+depend: [ItemVault, SkyMineCore]
 commands:
     skyenchants:
         description: The command to manage enchantments
