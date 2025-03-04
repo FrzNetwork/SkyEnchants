@@ -75,7 +75,7 @@ public class DamageListener implements Listener {
                 }
 
                 // Apply damage absorption
-                double reductionFactor = (1 - (0.2 * protectionLevel) / (1 + 0.1 * protectionLevel));
+                double reductionFactor = (1 - (0.1 * protectionLevel) / (1 + 0.1 * protectionLevel));
                 finalDamage = Math.max(0, (finalDamage - damageAbsorptionLevel) * reductionFactor);
             }
         }
