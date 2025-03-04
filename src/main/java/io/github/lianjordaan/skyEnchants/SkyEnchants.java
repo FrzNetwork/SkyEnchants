@@ -2,6 +2,7 @@ package io.github.lianjordaan.skyEnchants;
 
 import io.github.lianjordaan.skyEnchants.enchantments.*;
 import io.github.lianjordaan.skyEnchants.events.BlockBreakListener;
+import io.github.lianjordaan.skyEnchants.events.DamageListener;
 import io.github.lianjordaan.skyMineCore.SkyMineCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -37,9 +38,12 @@ public final class SkyEnchants extends JavaPlugin {
         EnchantmentRegistry.register(new ResourceConverterEnchant(this));
         EnchantmentRegistry.register(new AutoPickupEnchant(this));
         EnchantmentRegistry.register(new ResourceEnchanterEnchant(this));
+        EnchantmentRegistry.register(new ProtectionEnchant(this));
+        EnchantmentRegistry.register(new DamageAbsorptionEnchant(this));
 
         // Register events
         getServer().getPluginManager().registerEvents(new BlockBreakListener(this, skyMineCore), this);
+        getServer().getPluginManager().registerEvents(new DamageListener(this, skyMineCore), this);
 
         // Register commands
         getCommand("skyenchants").setExecutor(new SkyEnchantsCommand(this));
